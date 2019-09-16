@@ -12,6 +12,7 @@
 - redux
 - node-sass
 - http-proxy-middle
+- gravatar
 
 ### routes
 
@@ -43,8 +44,14 @@
     - express
     - express-session
     - dotenv
-    - bcrypt
+    - bcryptjs
     - mongoose
+    - express-validator
+    - config
+    - jsonwebtoken
+    - request
+    - nodemon
+    - concurrently
 
 ### server file structure
 
