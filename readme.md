@@ -88,11 +88,3 @@ SERVER_PORT=
 ```
 
 # Bikepackers.net
-
-# bikepackers
-
-# bikepackers
-
-# bikepackers
-
-# bikepackers
