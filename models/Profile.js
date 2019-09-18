@@ -26,7 +26,7 @@ const ProfileSchema = new mongoose.Schema({
     type: String
   },
   //   formerly experience
-  racingresume: [
+  racingResume: [
     {
       eventDistance: {
         type: String,
@@ -39,12 +39,9 @@ const ProfileSchema = new mongoose.Schema({
       location: {
         type: String
       },
-      start: {
+      date: {
         type: Date,
         required: true
-      },
-      endDate: {
-        type: Date
       },
       description: {
         type: String
