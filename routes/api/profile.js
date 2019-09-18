@@ -217,4 +217,56 @@ router.delete("/racingResume/:racingResume_id", auth, async (req, res) => {
   }
 });
 
+// @ route          Put api/profile/favoriteRoutes
+// @ description    Add profile racing resume
+// @ access         Private
+
+router.put("/favoriteRoutes", [auth], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { routeName, distance, difficultyRating, link } = req.body;
+
+  const newRoute = {
+    routeName,
+    distance,
+    difficultyRating,
+    link
+  };
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+
+    profile.favoriteRoutes.unshift(newRoute);
+
+    await profile.save();
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @ route          Delete api/profile/favoriteRoutes/:favRoute_id
+// @ description    Delete a favoriteRoutes from profile
+// @ access         Private
+router.delete("/favoriteRoutes/:favRoute_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    // get remove index
+    const removeIndex = profile.favoriteRoutes
+      .map(item => item.id)
+      .indexOf(req.params.favRoute_id);
+
+    profile.favoriteRoutes.splice(removeIndex, 1);
+    await profile.save();
+
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

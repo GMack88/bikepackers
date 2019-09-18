@@ -51,16 +51,13 @@ const ProfileSchema = new mongoose.Schema({
   favoriteRoutes: [
     {
       routeName: {
-        type: String,
-        required: true
+        type: String
       },
       distance: {
-        type: String,
-        required: true
+        type: String
       },
       difficultyRating: {
-        type: String,
-        required: true
+        type: String
       },
       link: {
         type: String
