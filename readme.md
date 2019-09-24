@@ -75,7 +75,7 @@
 **Bikepacking.net endpoints**
 
 - get => /api/get_users
-- get => /api/auth
+- get =>
 - post => /api/profile
 - delete => /api/posts
 

@@ -14,7 +14,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   //   formerly status
   disciplines: {
-    type: [String],
+    type: String,
     required: true
   },
   //   skills
@@ -72,9 +72,6 @@ const ProfileSchema = new mongoose.Schema({
       type: String
     },
     facebook: {
-      type: String
-    },
-    strava: {
       type: String
     },
     instagram: {
