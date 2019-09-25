@@ -8,6 +8,8 @@ import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/profile-forms/CreateProfile";
 import EditProfile from "./components/profile-forms/EditProfile";
+import AddFavoriteRoutes from "./components/profile-forms/AddFavoriteRoutes";
+import AddRacingResume from "./components/profile-forms/AddRacingResume";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 // Redux
@@ -48,6 +50,16 @@ const App = () => {
                 exact
                 path="/edit-profile"
                 component={EditProfile}
+              />
+              <PrivateRoute
+                exact
+                path="/add-racing-resume"
+                component={AddRacingResume}
+              />
+              <PrivateRoute
+                exact
+                path="/add-favorite-routes"
+                component={AddFavoriteRoutes}
               />
             </Switch>
           </section>

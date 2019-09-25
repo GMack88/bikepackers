@@ -48,6 +48,7 @@ const ProfileSchema = new mongoose.Schema({
       }
     }
   ],
+  // previously education
   favoriteRoutes: [
     {
       routeName: {

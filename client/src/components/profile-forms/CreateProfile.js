@@ -73,6 +73,18 @@ const CreateProfile = ({ createProfile, history }) => {
         <div className="form-group">
           <input
             type="text"
+            placeholder="Disciplines"
+            name="disciplines"
+            value={disciplines}
+            onChange={e => onChange(e)}
+          />
+          <small className="form-text">
+            City & state suggested (e.g. Boulder, CO)
+          </small>
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
             placeholder="stravaurl"
             name="stravaurl"
             value={stravaurl}

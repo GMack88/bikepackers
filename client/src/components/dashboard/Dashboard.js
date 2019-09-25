@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
+import RacingResume from "./RacingResume";
+import FavoriteRoutes from "./FavoriteRoutes";
 import DashboardActions from "./DashboardActions";
 import { getCurrentProfile } from "../../actions/profile";
 
@@ -25,6 +27,8 @@ const Dashboard = ({
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
+          <RacingResume racingResume={profile.racingResume} />
+          <FavoriteRoutes favoriteRoutes={profile.favoriteRoutes} />
         </Fragment>
       ) : (
         <Fragment>
