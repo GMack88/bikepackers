@@ -2,7 +2,8 @@
   "name": "bikepackers",
   "version": "0.1.0",
   "private": true,
-  "main": "server/",
+  "main": "server.js",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.2.2",

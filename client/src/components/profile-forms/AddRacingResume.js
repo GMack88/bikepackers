@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addRacingResume } from "../../actions/profile";
@@ -89,10 +89,10 @@ const AddRacingResume = ({ addRacingResume, history }) => {
 };
 
 AddRacingResume.propTypes = {
-  AddRacingResume: PropTypes.func.isRequired
+  addRacingResume: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { AddRacingResume }
-)(AddRacingResume);
+  { addRacingResume }
+)(withRouter(AddRacingResume));
