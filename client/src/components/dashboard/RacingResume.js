@@ -1,14 +1,20 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { deleteRacingResume } from "../../actions/profile";
 
-const RacingResume = ({ racingResume }) => {
+const RacingResume = ({ racingResume, deleteRacingResume }) => {
   const races = racingResume.map(race => (
     <tr key={race._id}>
       <td>{race.eventDistance}</td>
       <td className="hide-sm">{race.location}</td>
       <td>
-        <button className="btn btn-danger">Delete</button>
+        <button
+          onClick={() => deleteRacingResume(race._id)}
+          className="btn btn-danger"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   ));
@@ -32,7 +38,11 @@ const RacingResume = ({ racingResume }) => {
 };
 
 RacingResume.propTypes = {
-  racingResume: PropTypes.array.isRequired
+  racingResume: PropTypes.array.isRequired,
+  deleteRacingResume: PropTypes.func.isRequired
 };
 
-export default RacingResume;
+export default connect(
+  null,
+  { deleteRacingResume }
+)(RacingResume);

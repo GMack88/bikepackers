@@ -1,14 +1,20 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { deleteFavoriteRoutes } from "../../actions/profile";
 
-const FavoriteRoutes = ({ favoriteRoutes }) => {
+const FavoriteRoutes = ({ favoriteRoutes, deleteFavoriteRoutes }) => {
   const favs = favoriteRoutes.map(fav => (
     <tr key={fav._id}>
       <td>{fav.routeName}</td>
       <td className="hide-sm">{fav.difficultyRating}</td>
       <td>
-        <button className="btn btn-danger">Delete</button>
+        <button
+          onClick={() => deleteFavoriteRoutes(fav._id)}
+          className="btn btn-danger"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   ));
@@ -32,7 +38,11 @@ const FavoriteRoutes = ({ favoriteRoutes }) => {
 };
 
 FavoriteRoutes.propTypes = {
-  favoriteRoutes: PropTypes.array.isRequired
+  favoriteRoutes: PropTypes.array.isRequired,
+  deleteFavoriteRoutes: PropTypes.func.isRequired
 };
 
-export default FavoriteRoutes;
+export default connect(
+  null,
+  { deleteFavoriteRoutes }
+)(FavoriteRoutes);
