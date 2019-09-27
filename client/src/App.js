@@ -11,6 +11,7 @@ import EditProfile from "./components/profile-forms/EditProfile";
 import AddFavoriteRoutes from "./components/profile-forms/AddFavoriteRoutes";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
+import Posts from "./components/posts/Posts";
 import AddRacingResume from "./components/profile-forms/AddRacingResume";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
@@ -65,6 +66,7 @@ const App = () => {
                 path="/add-favorite-routes"
                 component={AddFavoriteRoutes}
               />
+              <PrivateRoute exact path="/posts" component={Posts} />
             </Switch>
           </section>
         </Fragment>
