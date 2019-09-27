@@ -405,33 +405,33 @@ button {
   text-align: center;
 }
 
-.profile-exp {
+.profile-rr {
   grid-area: exp;
 }
 
-.profile-edu {
+.profile-fav {
   grid-area: edu;
 }
 
-.profile-exp h2,
-.profile-edu h2 {
+.profile-rr h2,
+.profile-fav h2 {
   margin-bottom: 1rem;
 }
 
-.profile-exp > div,
-.profile-edu > div {
+.profile-rr > div,
+.profile-fav > div {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   border-bottom: #ccc 1px dotted;
 }
 
-.profile-exp > div:last-child,
-.profile-edu > div:last-child {
+.profile-rr > div:last-child,
+.profile-fav > div:last-child {
   border: 0;
 }
 
-.profile-exp p,
-.profile-edu p {
+.profile-rr p,
+.profile-fav p {
   margin: 0.5rem 0;
 }
 

@@ -2,6 +2,8 @@ import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import ProfileFavoriteRoutes from "./ProfileFavoriteRoutes";
+import ProfileRacingResume from "./ProfileRacingResume";
 import ProfileAbout from "./ProfileAbout";
 import Spinner from "../layout/Spinner";
 import ProfileTop from "./ProfileTop";
@@ -35,6 +37,37 @@ const Profile = ({
           <div class="profile-grid my-1">
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
+            <div className="profile-rr bg-white p-2">
+              <h2 className="text-primary">Racing Resume</h2>
+              {profile.racingResume.length > 0 ? (
+                <Fragment>
+                  {profile.racingResume.map(racingResume => (
+                    <ProfileRacingResume
+                      key={racingResume._id}
+                      racingResume={racingResume}
+                    />
+                  ))}
+                </Fragment>
+              ) : (
+                <h4>No Racing history</h4>
+              )}
+            </div>
+
+            <div className="profile-fav bg-white p-2">
+              <h2 className="text-primary">Favorite Routes</h2>
+              {profile.favoriteRoutes.length > 0 ? (
+                <Fragment>
+                  {profile.favoriteRoutes.map(favoriteRoutes => (
+                    <ProfileRacingResume
+                      key={favoriteRoutes._id}
+                      favoriteRoutes={favoriteRoutes}
+                    />
+                  ))}
+                </Fragment>
+              ) : (
+                <h4>No Added Routes</h4>
+              )}
+            </div>
           </div>
         </Fragment>
       )}

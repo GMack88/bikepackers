@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { deleteRacingResume } from "../../actions/profile";
 
 const RacingResume = ({ racingResume, deleteRacingResume }) => {
@@ -8,6 +8,7 @@ const RacingResume = ({ racingResume, deleteRacingResume }) => {
     <tr key={race._id}>
       <td>{race.eventDistance}</td>
       <td className="hide-sm">{race.location}</td>
+
       <td>
         <button
           onClick={() => deleteRacingResume(race._id)}
@@ -18,6 +19,7 @@ const RacingResume = ({ racingResume, deleteRacingResume }) => {
       </td>
     </tr>
   ));
+
   return (
     <Fragment>
       <h2 className="my-2">Racing Resume</h2>
@@ -27,7 +29,7 @@ const RacingResume = ({ racingResume, deleteRacingResume }) => {
             <th>Event Distance</th>
             <th className="hide-sm">Event Name</th>
             <th className="hide-sm">Location</th>
-            <th className="hide-sm">Date</th>
+
             <th />
           </tr>
         </thead>

@@ -160,7 +160,7 @@ export const addFavoriteRoutes = (formData, history) => async dispatch => {
   }
 };
 
-// Delete an experience
+// Delete an resume item
 export const deleteRacingResume = id => async dispatch => {
   try {
     const res = await axios.delete(`/api/profile/racingResume/${id}`);
