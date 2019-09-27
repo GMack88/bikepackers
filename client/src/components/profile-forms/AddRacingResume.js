@@ -20,8 +20,8 @@ const AddRacingResume = ({ addRacingResume, history }) => {
   return (
     <Fragment>
       <h1 className="large text-primary">Add Racing Resume</h1>
-      <p class="lead">
-        <i class="fas fa-code-branch"></i> Add some of your accomplishments
+      <p className="lead">
+        <i className="fa fa-file-text-o"></i> Add some of your accomplishments
       </p>
       <small>* = required field</small>
       <form

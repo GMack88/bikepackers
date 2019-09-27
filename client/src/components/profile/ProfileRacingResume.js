@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const ProfileRacingResume = ({
   racingResume: { eventDistance, eventName, location, date, description }
-}) => {
+}) => (
   <div>
     <h3 className="text-dark">{eventName}</h3>
     <p>{date}</p>
@@ -19,8 +19,8 @@ const ProfileRacingResume = ({
       <strong>Description: </strong>
       {description}
     </p>
-  </div>;
-};
+  </div>
+);
 
 ProfileRacingResume.propTypes = {
   racingResume: PropTypes.array.isRequired

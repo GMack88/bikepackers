@@ -20,8 +20,8 @@ const AddFavoriteRoutes = ({ addFavoriteRoutes, history }) => {
     <Fragment>
       <h1 className="large text-primary">Add Your Favorite Routes</h1>
       <p class="lead">
-        <i class="fas fa-code-branch"></i> Add any bikepacking routes you know
-        and love.
+        <i class="fa fa-compass"></i> Add any bikepacking routes you know and
+        love.
       </p>
       <small>* = required field</small>
       <form

@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 
 const ProfileFavoriteRoutes = ({
   favoriteRoutes: { routeName, distance, link }
-}) => {
+}) => (
   <div>
     <h3 className="text-dark">{routeName}</h3>
-    <p>{date}</p>
+    <p>{routeName}</p>
     <p>
       <strong>Route Distance: </strong>
       {distance}
@@ -15,9 +15,8 @@ const ProfileFavoriteRoutes = ({
       <strong>Location: </strong>
       {link}
     </p>
-  </div>;
-};
-
+  </div>
+);
 ProfileFavoriteRoutes.propTypes = {
   favoriteRoutes: PropTypes.array.isRequired
 };

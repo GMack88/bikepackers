@@ -14,7 +14,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   //    status
   disciplines: {
-    type: String,
+    type: [String],
     required: true
   },
   //   skills
@@ -48,7 +48,7 @@ const ProfileSchema = new mongoose.Schema({
       }
     }
   ],
-  // previously education
+  //  education
   favoriteRoutes: [
     {
       routeName: {

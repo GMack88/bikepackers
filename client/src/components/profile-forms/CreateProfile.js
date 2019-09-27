@@ -85,7 +85,7 @@ const CreateProfile = ({ createProfile, history }) => {
         <div className="form-group">
           <input
             type="text"
-            placeholder="stravaurl"
+            placeholder="Strava Url"
             name="stravaurl"
             value={stravaurl}
             onChange={e => onChange(e)}
