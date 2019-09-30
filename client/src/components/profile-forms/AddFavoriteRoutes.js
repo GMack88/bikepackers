@@ -12,16 +12,15 @@ const AddFavoriteRoutes = ({ addFavoriteRoutes, history }) => {
     link: ""
   });
 
-  const [toDateDisabled, toggleDisabled] = useState(false);
   const { routeName, distance, difficultyRating, link } = formData;
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   return (
     <Fragment>
       <h1 className="large text-primary">Add Your Favorite Routes</h1>
-      <p class="lead">
-        <i class="fa fa-compass"></i> Add any bikepacking routes you know and
-        love.
+      <p className="lead">
+        <i className="fa fa-compass"></i> Add any bikepacking routes you know
+        and love.
       </p>
       <small>* = required field</small>
       <form
@@ -70,7 +69,7 @@ const AddFavoriteRoutes = ({ addFavoriteRoutes, history }) => {
           />
         </div>
         <input type="submit" className="btn btn-primary my-1" />
-        <a className="btn btn-light my-1" href="dashboard.html">
+        <a className="btn btn-light my-1" href="/dashboard">
           Go Back
         </a>
       </form>
@@ -85,4 +84,4 @@ AddFavoriteRoutes.propTypes = {
 export default connect(
   null,
   { addFavoriteRoutes }
-)(withRouter(addFavoriteRoutes));
+)(withRouter(AddFavoriteRoutes));

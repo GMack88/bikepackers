@@ -16,10 +16,10 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <h1 className="large text-primary">Riders</h1>
+          <h1 className="large text-primary">Bikeackers.net</h1>
           <p className="lead">
-            <i className="fa fa-bicycle" /> Browse and connect with other
-            bikepackers
+            <i className="fab fa-connectdevelop" /> Browse and connect with
+            fellow bikepackers
           </p>
           <div className="profiles">
             {profiles.length > 0 ? (

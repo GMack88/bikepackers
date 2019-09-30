@@ -126,7 +126,7 @@ export const addRacingResume = (formData, history) => async dispatch => {
   }
 };
 
-//  Add Favotite Routes
+//  Add Favorite Routes
 export const addFavoriteRoutes = (formData, history) => async dispatch => {
   try {
     const config = {

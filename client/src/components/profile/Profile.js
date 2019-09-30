@@ -58,7 +58,7 @@ const Profile = ({
               {profile.favoriteRoutes.length > 0 ? (
                 <Fragment>
                   {profile.favoriteRoutes.map(favoriteRoutes => (
-                    <ProfileRacingResume
+                    <ProfileFavoriteRoutes
                       key={favoriteRoutes._id}
                       favoriteRoutes={favoriteRoutes}
                     />

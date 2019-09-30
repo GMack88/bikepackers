@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Freckle+Face|Montserrat&display=swap");
+
 /* Global Styles */
 :root {
   --primary-color: coral;
-  --dark-color: #343a40;
+  --dark-color: #0077b5;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
@@ -14,7 +16,7 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
@@ -301,6 +303,7 @@ button {
 /* Navbar */
 .navbar {
   display: flex;
+  font-family: "Freckle Face", cursive;
   justify-content: space-between;
   align-items: center;
   padding: 0.7rem 2rem;
@@ -501,6 +504,7 @@ button {
   /* Text Styles */
   .x-large {
     font-size: 3rem;
+    font-family: "Freckle Face", cursive;
   }
 
   .large {
