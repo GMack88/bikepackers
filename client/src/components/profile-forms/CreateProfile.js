@@ -8,7 +8,6 @@ const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     website: "",
     location: "",
-    disciplines: "",
     bio: "",
     stravaurl: "",
     twitter: "",
@@ -20,7 +19,6 @@ const CreateProfile = ({ createProfile, history }) => {
   const {
     website,
     location,
-    disciplines,
     bio,
     stravaurl,
     twitter,
@@ -70,14 +68,7 @@ const CreateProfile = ({ createProfile, history }) => {
             City & state suggested (e.g. Boulder, CO)
           </small>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Disciplines"
-            name="disciplines"
-            value={disciplines}
-            onChange={e => onChange(e)}
-          />
+        <div>
           <small className="form-text">
             City & state suggested (e.g. Boulder, CO)
           </small>

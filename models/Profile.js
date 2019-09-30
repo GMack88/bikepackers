@@ -13,10 +13,10 @@ const ProfileSchema = new mongoose.Schema({
     type: String
   },
   //    status
-  disciplines: {
-    type: [String],
-    required: true
-  },
+  // disciplines: {
+  //   type: [String],
+  //   required: true
+  // },
   //   skills
   bio: {
     type: String

@@ -52,7 +52,6 @@ router.post(
       website,
       location,
       bio,
-      disciplines,
       stravaurl,
       youtube,
       facebook,
@@ -71,11 +70,6 @@ router.post(
     if (facebook) profileFields.facebook = facebook;
     if (twitter) profileFields.twitter = twitter;
     if (instagram) profileFields.instagram = instagram;
-    if (disciplines) {
-      profileFields.disciplines = disciplines
-        .split(",")
-        .map(discipline => discipline.trim());
-    }
 
     // build a social object
     profileFields.social = {};

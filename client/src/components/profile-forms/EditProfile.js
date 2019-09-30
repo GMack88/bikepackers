@@ -13,7 +13,6 @@ const EditProfile = ({
   const [formData, setFormData] = useState({
     website: "",
     location: "",
-    disciplines: "",
     bio: "",
     stravaurl: "",
     twitter: "",
@@ -28,7 +27,6 @@ const EditProfile = ({
     setFormData({
       website: loading || !profile.website ? "" : profile.website,
       location: loading || !profile.location ? "" : profile.location,
-      disciplines: loading || !profile.disciplines ? "" : profile.disciplines,
       stravaurl: loading || !profile.stravaurl ? "" : profile.stravaurl,
       bio: loading || !profile.bio ? "" : profile.bio,
       twitter: loading || !profile.social ? "" : profile.social.twitter,
@@ -41,7 +39,6 @@ const EditProfile = ({
   const {
     website,
     location,
-    disciplines,
     bio,
     stravaurl,
     twitter,
