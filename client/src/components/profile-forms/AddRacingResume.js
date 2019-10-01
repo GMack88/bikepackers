@@ -13,7 +13,7 @@ const AddRacingResume = ({ addRacingResume, history }) => {
     description: ""
   });
 
-  const [toDateDisabled, toggleDisabled] = useState(false);
+  // const [toDateDisabled, toggleDisabled] = useState(false);
   const { eventDistance, eventName, location, date, description } = formData;
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });

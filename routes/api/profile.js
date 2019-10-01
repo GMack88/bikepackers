@@ -212,7 +212,7 @@ router.put(
 //   }
 // });
 //  ******************Interchangeable? ^>
-router.delete("/racingResume/:racingResume_id", auth, async (req, res) => {
+router.delete("/racingResume/:race_id", auth, async (req, res) => {
   try {
     const foundProfile = await Profile.findOne({ user: req.user.id });
     const raceIds = foundProfile.racingResume.map(race => race._id.toString());

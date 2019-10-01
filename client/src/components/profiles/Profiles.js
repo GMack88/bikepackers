@@ -18,8 +18,8 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
         <Fragment>
           <h1 className="large text-primary">Bikeackers.net</h1>
           <p className="lead">
-            <i className="fab fa-connectdevelop" /> Browse and connect with
-            fellow bikepackers
+            <i className="fas fa-users" /> Browse and connect with fellow
+            bikepackers
           </p>
           <div className="profiles">
             {profiles.length > 0 ? (

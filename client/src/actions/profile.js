@@ -50,7 +50,7 @@ export const getProfileById = userId => async dispatch => {
     const res = await axios.get(`/api/profile/user/${userId}`);
 
     dispatch({
-      type: GET_PROFILES,
+      type: GET_PROFILE,
       payload: res.data
     });
   } catch (error) {
@@ -81,7 +81,7 @@ export const createProfile = (
 
     dispatch(setAlert(edit ? "Profile Updated" : "Profile Created"));
     if (!edit) {
-      history.push("dashboard");
+      history.push("/dashboard");
     }
   } catch (error) {
     const errors = error.response.data.errors;
@@ -112,7 +112,7 @@ export const addRacingResume = (formData, history) => async dispatch => {
 
     dispatch(setAlert("Experience Added", "success"));
 
-    history.push("dashboard");
+    history.push("/dashboard");
   } catch (error) {
     const errors = error.response.data.errors;
 
@@ -146,7 +146,7 @@ export const addFavoriteRoutes = (formData, history) => async dispatch => {
 
     dispatch(setAlert("Favorite Routes Added", "success"));
 
-    history.push("dashboard");
+    history.push("/dashboard");
   } catch (error) {
     const errors = error.response.data.errors;
 
@@ -160,7 +160,7 @@ export const addFavoriteRoutes = (formData, history) => async dispatch => {
   }
 };
 
-// Delete an resume item
+// Delete a resume item
 export const deleteRacingResume = id => async dispatch => {
   try {
     const res = await axios.delete(`/api/profile/racingResume/${id}`);
@@ -168,7 +168,7 @@ export const deleteRacingResume = id => async dispatch => {
       type: UPDATE_PROFILE,
       payload: res.data
     });
-    dispatch(setAlert("Racing Resume Removed", "success"));
+    dispatch(setAlert("Race Removed", "success"));
   } catch (error) {
     dispatch({
       type: PROFILE_ERROR,
