@@ -110,7 +110,7 @@ export const addRacingResume = (formData, history) => async dispatch => {
       payload: res.data
     });
 
-    dispatch(setAlert("Experience Added", "success"));
+    dispatch(setAlert("Race Added", "success"));
 
     history.push("/dashboard");
   } catch (error) {

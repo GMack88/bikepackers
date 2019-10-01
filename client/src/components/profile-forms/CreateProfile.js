@@ -68,11 +68,7 @@ const CreateProfile = ({ createProfile, history }) => {
             City & state suggested (e.g. Boulder, CO)
           </small>
         </div>
-        <div>
-          <small className="form-text">
-            City & state suggested (e.g. Boulder, CO)
-          </small>
-        </div>
+        <div></div>
         <div className="form-group">
           <input
             type="text"
@@ -81,6 +77,7 @@ const CreateProfile = ({ createProfile, history }) => {
             value={stravaurl}
             onChange={e => onChange(e)}
           />
+          <small className="form-text">Your Strava.com Profile URL</small>
         </div>
         <div className="form-group">
           <textarea

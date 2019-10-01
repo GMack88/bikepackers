@@ -25,9 +25,8 @@ const FavoriteRoutes = ({ favoriteRoutes, deleteFavoriteRoutes }) => {
         <thead>
           <tr>
             <th>Route Name</th>
-            <th className="hide-sm">Distance</th>
+            <th className="hide-sm">Rating</th>
             <th className="hide-sm">Difficulty Rating</th>
-            <th className="hide-sm">Link</th>
             <th />
           </tr>
         </thead>

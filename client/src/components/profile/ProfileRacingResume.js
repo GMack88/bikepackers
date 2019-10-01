@@ -23,7 +23,7 @@ const ProfileRacingResume = ({
 );
 
 ProfileRacingResume.propTypes = {
-  racingResume: PropTypes.array.isRequired
+  racingResume: PropTypes.object.isRequired
 };
 
 export default ProfileRacingResume;
