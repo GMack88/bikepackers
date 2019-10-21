@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.72ab3e15.chunk.css",
+    "main.js": "/static/js/main.b95bb7cf.chunk.js",
+    "main.js.map": "/static/js/main.b95bb7cf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a7ca617d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a7ca617d.js.map",
+    "static/js/2.ccd21ee5.chunk.js": "/static/js/2.ccd21ee5.chunk.js",
+    "static/js/2.ccd21ee5.chunk.js.map": "/static/js/2.ccd21ee5.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f2c151222a7361d7f642deb5390c08fc.js": "/precache-manifest.f2c151222a7361d7f642deb5390c08fc.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.72ab3e15.chunk.css.map": "/static/css/main.72ab3e15.chunk.css.map",
+    "static/media/App.css": "/static/media/mountainBiking.8f7acc40.jpg",
+    "static/media/spinner.gif": "/static/media/spinner.514bc3d6.gif"
+  }
+}

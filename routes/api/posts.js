@@ -115,31 +115,32 @@ router.put("/like/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    // check if the post has already been liked by this user
+    // Check if the post has already been liked
     if (
       post.likes.filter(like => like.user.toString() === req.user.id).length > 0
     ) {
-      return res.status(400).json({ msg: "Post has already been liked" });
+      return res.status(400).json({ msg: "Post already liked" });
     }
 
     post.likes.unshift({ user: req.user.id });
+
     await post.save();
 
     res.json(post.likes);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send("Server Error");
   }
 });
 
-// @route    PUT api/posts/unlike/:id
-// @desc     Unlike a post
+//   @route    PUT api/posts/unlike/:id
+// @desc     Like a post
 // @access   Private
 router.put("/unlike/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    // check if the post has already been liked by this user
+    // Check if the post has already been liked
     if (
       post.likes.filter(like => like.user.toString() === req.user.id).length ===
       0
@@ -147,7 +148,7 @@ router.put("/unlike/:id", auth, async (req, res) => {
       return res.status(400).json({ msg: "Post has not yet been liked" });
     }
 
-    //     Get remove index
+    // Get remove index
     const removeIndex = post.likes
       .map(like => like.user.toString())
       .indexOf(req.user.id);
@@ -159,12 +160,13 @@ router.put("/unlike/:id", auth, async (req, res) => {
     res.json(post.likes);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send("Server Error");
   }
 });
 
 // @route    POST api/posts/comment/:id
 // @desc     Comment on a post
+
 // @access   Private
 router.post(
   "/comment/:id",
@@ -223,17 +225,18 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     }
 
     // Check user
+
     if (comment.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "User not authorized" });
     }
 
     // Get remove index
+
     const removeIndex = post.comments
       .map(comment => comment.id)
       .indexOf(req.params.comment_id);
 
     post.comments.splice(removeIndex, 1);
-
     await post.save();
 
     res.json(post.comments);

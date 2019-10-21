@@ -1,33 +1,38 @@
 const express = require("express");
+const request = require("request");
+const config = require("config");
 const router = express.Router();
 const auth = require("../../middleware/auth");
-const Profile = require("../../models/Profile");
-const User = require("../../models/User");
 const { check, validationResult } = require("express-validator");
 
-// @ route          GET api/profile/me
-// @ description    get current user's profile
-// @ access         Private
+const Profile = require("../../models/Profile");
+const User = require("../../models/User");
+const Post = require("../../models/Post");
+
+// @route    GET api/profile/me
+// @desc     Get current users profile
+// @access   Private
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id }).populate(
       "user",
       ["name", "avatar"]
     );
+
     if (!profile) {
-      return res.status(400).json({ msg: "This user has no profile" });
+      return res.status(400).json({ msg: "There is no profile for this user" });
     }
 
     res.json(profile);
-  } catch (error) {
-    console.error(error.message);
+  } catch (err) {
+    console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
 
-// @ route          POST api/profile
-// @ description    Create or update user's profile
-// @ access         Private
+// @route    POST api/profile
+// @desc     Create or update user profile
+// @access   Private
 router.post(
   "/",
   [
@@ -47,13 +52,13 @@ router.post(
       website,
       location,
       bio,
-      disciplines,
       stravaurl,
       youtube,
       facebook,
       twitter,
       instagram
     } = req.body;
+
     // build profile object
     const profileFields = {};
     profileFields.user = req.user.id;
@@ -65,11 +70,6 @@ router.post(
     if (facebook) profileFields.facebook = facebook;
     if (twitter) profileFields.twitter = twitter;
     if (instagram) profileFields.instagram = instagram;
-    if (disciplines) {
-      profileFields.disciplines = disciplines
-        .split(",")
-        .map(discipline => discipline.trim());
-    }
 
     // build a social object
     profileFields.social = {};
@@ -79,19 +79,12 @@ router.post(
     if (instagram) profileFields.social.instagram = instagram;
 
     try {
-      let profile = await Profile.findOne({ user: req.user.id });
-      if (profile) {
-        //   update
-        profile = await Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
-        return res.json(profile);
-      }
-      //   create
-      profile = new Profile(profileFields);
-      await profile.save();
+      // Using upsert option (creates new doc if no match is found):
+      let profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true, upsert: true }
+      );
       res.json(profile);
     } catch (error) {
       console.error(error.message);
@@ -100,9 +93,9 @@ router.post(
   }
 );
 
-// @ route          Get api/profile
-// @ description    Get all profiles
-// @ access         Public
+// @route    GET api/profile
+// @desc     Get all profiles
+// @access   Public
 router.get("/", async (req, res) => {
   try {
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
@@ -113,17 +106,18 @@ router.get("/", async (req, res) => {
   }
 });
 
-// @ route          Get api/profile/user/:user_id
-// @ description    Get profile by user ID
-// @ access         Public
+// @route    GET api/profile/user/:user_id
+// @desc     Get profile by user ID
+// @access   Public
 router.get("/user/:user_id", async (req, res) => {
   try {
-    const profiles = await Profile.findOne({
+    const profile = await Profile.findOne({
       user: req.params.user_id
     }).populate("user", ["name", "avatar"]);
 
     if (!profile) return res.status(400).json({ msg: "Profile not found" });
-    res.json(profiles);
+
+    res.json(profile);
   } catch (error) {
     console.error(error.message);
     if (error.kind == "ObjectId") {
@@ -132,22 +126,22 @@ router.get("/user/:user_id", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-// @ route          Delete api/profile
-// @ description    GDelete profile user and posts
-// @ access         Private
 
+// @route    DELETE api/profile
+// @desc     Delete profile, user & posts
+// @access   Private
 router.delete("/", auth, async (req, res) => {
   try {
-    //   @todo - remove users posts
-
-    //   remove profile
-
+    // Remove user posts
+    await Post.deleteMany({ user: req.user.id });
+    // Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
     // Remove user
     await User.findOneAndRemove({ _id: req.user.id });
-    res.json({ msg: "Account deleted" });
-  } catch (error) {
-    console.error(error.message);
+
+    res.json({ msg: "User deleted" });
+  } catch (err) {
+    console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
@@ -199,21 +193,45 @@ router.put(
 // @ route          Delete api/profile/racingResume/:racingResume_id
 // @ description    Delete a racingResume from profile
 // @ access         Private
-router.delete("/racingResume/:racingResume_id", auth, async (req, res) => {
+
+// router.delete("/racingResume/:racingResume_id", auth, async (req, res) => {
+//   try {
+//     const profile = await Profile.findOne({ user: req.user.id });
+//     // get remove index
+//     const removeIndex = profile.racingResume
+//       .map(item => item.id)
+//       .indexOf(req.params.racingResume_id);
+
+//     profile.racingResume.splice(removeIndex, 1);
+//     await profile.save();
+
+//     res.json(profile);
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
+//  ******************Interchangeable? ^>
+router.delete("/racingResume/:race_id", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id });
-    // get remove index
-    const removeIndex = profile.racingResume
-      .map(item => item.id)
-      .indexOf(req.params.racingResume_id);
+    const foundProfile = await Profile.findOne({ user: req.user.id });
+    const raceIds = foundProfile.racingResume.map(race => race._id.toString());
 
-    profile.racingResume.splice(removeIndex, 1);
-    await profile.save();
-
-    res.json(profile);
+    const removeIndex = raceIds.indexOf(req.params.race_id);
+    if (removeIndex === -1) {
+      return res.status(500).json({ msg: "Server error" });
+    } else {
+      console.log("raceIds", raceIds);
+      console.log("typeof raceIds", typeof raceIds);
+      console.log("req.params", req.params);
+      console.log("removed", raceIds.indexOf(req.params.race_id));
+      foundProfile.racingResume.splice(removeIndex, 1);
+      await foundProfile.save();
+      return res.status(200).json(foundProfile);
+    }
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Server Error");
+    console.error(error);
+    return res.status(500).json({ msg: "Server error" });
   }
 });
 
@@ -221,32 +239,52 @@ router.delete("/racingResume/:racingResume_id", auth, async (req, res) => {
 // @ description    Add profile racing resume
 // @ access         Private
 
-router.put("/favoriteRoutes", [auth], async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+router.put(
+  "/favoriteRoutes",
+  [
+    auth,
+    [
+      check("routeName", "Route Name is required")
+        .not()
+        .isEmpty(),
+      check("distance", "Distance is required")
+        .not()
+        .isEmpty(),
+      check("difficultyRating", "Difficulty Rating is required")
+        .not()
+        .isEmpty(),
+      check("link", "Link is required")
+        .not()
+        .isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { routeName, distance, difficultyRating, link } = req.body;
+
+    const newRoute = {
+      routeName,
+      distance,
+      difficultyRating,
+      link
+    };
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+
+      profile.favoriteRoutes.unshift(newRoute);
+
+      await profile.save();
+      res.json(profile);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Server Error");
+    }
   }
-
-  const { routeName, distance, difficultyRating, link } = req.body;
-
-  const newRoute = {
-    routeName,
-    distance,
-    difficultyRating,
-    link
-  };
-  try {
-    const profile = await Profile.findOne({ user: req.user.id });
-
-    profile.favoriteRoutes.unshift(newRoute);
-
-    await profile.save();
-    res.json(profile);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Server Error");
-  }
-});
+);
 
 // @ route          Delete api/profile/favoriteRoutes/:favRoute_id
 // @ description    Delete a favoriteRoutes from profile

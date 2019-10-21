@@ -12,20 +12,20 @@ const ProfileSchema = new mongoose.Schema({
   location: {
     type: String
   },
-  //   formerly status
-  disciplines: {
-    type: [String],
-    required: true
-  },
+  //    status
+  // disciplines: {
+  //   type: [String],
+  //   required: true
+  // },
   //   skills
   bio: {
     type: String
   },
-  //   formerly githubusername
+  //    githubusername
   stravaurl: {
     type: String
   },
-  //   formerly experience
+  //    experience
   racingResume: [
     {
       eventDistance: {
@@ -48,6 +48,7 @@ const ProfileSchema = new mongoose.Schema({
       }
     }
   ],
+  //  education
   favoriteRoutes: [
     {
       routeName: {
@@ -72,9 +73,6 @@ const ProfileSchema = new mongoose.Schema({
       type: String
     },
     facebook: {
-      type: String
-    },
-    strava: {
       type: String
     },
     instagram: {
